@@ -1,30 +1,54 @@
 {
-  "manifest": {
-    "publishingInformation": {
-      "locales": {
-        "en-US": {
-          "summary": "Ask Alexa about your Tesla",
-          "examplePhrases": [
-            "Alexa open nikola",
-            "Alexa ask nikola about charge status",
-            "Alexa ask nikola if my car is charged"
-          ],
-          "name": "Nikola",
-          "description": "Ask Alexa whether your Tesla is charged."
+    "manifest": {
+      "apis": {
+        "custom": {
+          "endpoint": {
+            "uri": "arn:aws:lambda:us-east-1:681658452866:function:com-aruntalkstech-tesla-lambda"
+          },
+          "interfaces": [
+            {
+              "type": "ALEXA_PRESENTATION_APL"
+            }
+          ]
         }
       },
-      "isAvailableWorldwide": true,
-      "testingInstructions": "Alexa, ask nikola about charge status",
-      "category": "EDUCATION_AND_REFERENCE",
-      "distributionCountries": []
-    },
-    "apis": {
-      "custom": {
-        "endpoint": {
-          "sourceDir": "lambda/custom"
-        }
+      "manifestVersion": "1.0",
+      "privacyAndCompliance": {
+        "locales": {
+          "en-US": {
+            "privacyPolicyUrl": "https://www.amazon.com/",
+            "termsOfUseUrl": "https://www.amazon.com/"
+          }
+        },
+        "allowsPurchases": false,
+        "usesPersonalInfo": false,
+        "isChildDirected": false,
+        "isExportCompliant": true,
+        "containsAds": false
+      },
+      "publishingInformation": {
+        "locales": {
+          "en-US": {
+            "name": "Nikola",
+            "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/28cd/dc39aa406e644919862834f6476e6f2d/APP_ICON?versionId=lNclXh7YX3NRF0PiHbI9armx9dgfdtqV&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1546231970&Signature=vLiOECdEmyigp6Y03YywXmz6i88%3D",
+            "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/7144/81a923eb6c45441383230fc0e69bd5ca/APP_ICON_LARGE?versionId=SzKILysRHHe.IXRGSV7X3u5KiDyelWS3&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1546231970&Signature=wRL7i3EDiFLEDTIowXFLloUY74A%3D",
+            "summary": "Ask Alexa about your Tesla",
+            "description": "Ask Alexa whether your Tesla is charged.",
+            "examplePhrases": [
+              "Alexa open nikola",
+              "Alexa ask nikola about charge status",
+              "Alexa ask nikola if my car is charged"
+            ],
+            "keywords": [
+              "Tesla"
+            ]
+          }
+        },
+        "isAvailableWorldwide": true,
+        "testingInstructions": "Alexa, ask nikola about charge status",
+        "category": "CONNECTED_CAR",
+        "distributionCountries": []
       }
-    },
-    "manifestVersion": "1.0"
+    }
   }
-}
+  
