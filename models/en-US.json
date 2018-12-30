@@ -1,0 +1,41 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "nikola",
+      "types": [
+
+      ],
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "ChargeStatusIntent",
+          "slots": [],
+          "samples": [
+            "charging status",
+            "my car is charged",
+            "charge",
+            "charging",
+            "power"
+          ]
+        }
+      ]
+    }
+  }
+}
