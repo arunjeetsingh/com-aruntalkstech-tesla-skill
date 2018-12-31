@@ -25,6 +25,12 @@
           ]
         },
         {
+            "name": "AMAZON.YesIntent",
+            "samples": [
+  
+            ]
+          },
+        {
           "name": "ChargeStatusIntent",
           "slots": [],
           "samples": [
