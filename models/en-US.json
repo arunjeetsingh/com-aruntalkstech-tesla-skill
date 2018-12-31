@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "nikola",
+      "invocationName": "nikola tesla",
       "types": [
 
       ],
@@ -40,7 +40,15 @@
             "charging",
             "power"
           ]
-        }
+        },
+        {
+            "name": "HonkIntent",
+            "slots": [],
+            "samples": [
+              "honk",
+              "honk the horn"
+            ]
+          }
       ]
     }
   }
