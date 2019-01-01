@@ -43,58 +43,55 @@ const LaunchRequestHandler = {
 
         if(carAttributes != null)
         {
+            console.log('carAttributes is not null');
+            const vehicleStateApl = require('apl/VehicleStateDocument.json');
+            var vehicleStateDatasource = new Object();
+            vehicleStateDatasource.vehicleDisplayData = new Object();
+
             //Persist data to session
-            sessionAttributes.currentTeslaId = carAttributes.currentTeslaId;
-            sessionAttributes.currentTeslaName = carAttributes.currentTeslaName;
-            sessionAttributes.currentTeslaState = carAttributes.currentTeslaState;
-            sessionAttributes.currentTeslaNamePhoneme = carAttributes.currentTeslaNamePhoneme;
-            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+            persistCarAttributesToSession(handlerInput, sessionAttributes, carAttributes);
 
             speechText = `Looks like ${sessionAttributes.currentTeslaNamePhoneme} is ${sessionAttributes.currentTeslaState}.`;
-            displayText = `Looks like ${sessionAttributes.currentTeslaName} is ${sessionAttributes.currentTeslaState}.`;
+            vehicleStateDatasource.vehicleDisplayData.name = sessionAttributes.currentTeslaName;
+            vehicleStateDatasource.vehicleDisplayData.state = sessionAttributes.currentTeslaState;
+            vehicleStateDatasource.vehicleDisplayData.imageUrl = 'https://s3.amazonaws.com/nikolatesla2/MDL3PPSB.png';
 
             if(isCarAvailable(sessionAttributes.currentTeslaState))
             {
                 sessionAttributes.nextCommand = 'getChargeStatus';
                 speechText += ` Do you want to know ${sessionAttributes.currentTeslaNamePhoneme} charge status?`;
-                displayText += ` Do you want to know ${sessionAttributes.currentTeslaName} charge status?`;
             }
             else
             {
                 sessionAttributes.nextCommand = 'wake';
                 speechText += ` Do you want me to try waking up ${sessionAttributes.currentTeslaNamePhoneme}?`;
-                displayText += ` Do you want me to try waking up ${sessionAttributes.currentTeslaName}?`;
             }
 
             skillResponse =  handlerInput.responseBuilder
                 .speak(speechText)
-                .withSimpleCard(sessionAttributes.currentTeslaName, displayText)
+                .addDirective({
+                    type: 'Alexa.Presentation.APL.RenderDocument',
+                    token: 'vehicleData',
+                    document: vehicleStateApl,
+                    datasources: vehicleStateDatasource
+                    })
                 .withShouldEndSession(false)
                 .getResponse();
         }
         else
         {
-            if(carAttributes == null)
-            {
-                speechText = 'Looks like you don\'t own any Tesla vehicles. Goodbye!';
+            console.log('carAttributes is null');
+            speechText = 'Looks like you don\'t own any Tesla vehicles. Goodbye!';
 
-                skillResponse =  handlerInput.responseBuilder
-                    .speak(speechText)
-                    .withShouldEndSession(true)
-                    .getResponse();
-            }
+            skillResponse =  handlerInput.responseBuilder
+                .speak(speechText)
+                .withShouldEndSession(true)
+                .getResponse();
         }
     }
     catch(error)
     {
-        console.log ('GetVehicles error: ' + error);
-        console.log ('GetVehicles request: ' + error.request);
-
-        speechText = errorSpeechText;
-        skillResponse = handlerInput.responseBuilder
-            .speak(speechText)
-            .withSimpleCard('Oops!', speechText)
-            .getResponse();
+        logErrorInformation('LaunchRequestHandler', error);
     }
     finally
     {
@@ -148,23 +145,54 @@ const ChargeStatusIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
         && handlerInput.requestEnvelope.request.intent.name === 'ChargeStatusIntent';
     },
-    handle(handlerInput) {
-        axiosClient.get(getVehiclesUri)
-            .then(response => {
-                console.log('ChargeStatusIntentHandler response');
-                console.log(response);
-            })
-            .catch(error => {
-                console.log('ChargeStatusIntentHandler error');
-                console.log (error);
-            });
+    async handle(handlerInput) {
+        console.log('LaunchRequestHandler' + JSON.stringify(handlerInput.requestEnvelope));
+        var speechText = fallbackSpeechText;
+        var displayText = fallbackSpeechText;
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        var skillResponse = null;
 
-        const speechText = 'I don\'t have an answer for that just yet';
+        try
+        {
+            var carAttributes = await getFirstCarAttributes();
 
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .withSimpleCard('I don\'t have an answer for that just yet', speechText)
-            .getResponse();
+            if(carAttributes != null)
+            {
+                //Persist data to session
+                persistCarAttributesToSession(handlerInput, sessionAttributes, carAttributes);
+
+                if(isCarAvailable(sessionAttributes.currentTeslaState))
+                {
+                    skillResponse = getChargeStateResponse(handlerInput, true);
+                }
+                else
+                {
+                    sessionAttributes.nextCommand = 'wake';
+                    speechText = `Looks like ${sessionAttributes.currentTeslaNamePhoneme} is ${sessionAttributes.currentTeslaState}. Should I wake it up?`;
+                    displayText = `Looks like ${sessionAttributes.currentTeslaName} is ${sessionAttributes.currentTeslaState}. Should I wake it up?`;
+
+                    skillResponse =  handlerInput.responseBuilder
+                    .speak(speechText)
+                    .withSimpleCard(sessionAttributes.currentTeslaName, displayText)
+                    .withShouldEndSession(false)
+                    .getResponse();
+                }
+            }
+            else
+            {
+                speechText = 'Looks like you don\'t own any Tesla vehicles. Goodbye!';
+
+                skillResponse =  handlerInput.responseBuilder
+                    .speak(speechText)
+                    .withShouldEndSession(true)
+                    .getResponse();
+            }
+        }
+        finally
+        {
+            console.log('Response: ' + JSON.stringify(skillResponse));
+            return skillResponse;
+        }
     },
 };
 
@@ -225,6 +253,19 @@ const ErrorHandler = {
   },
 };
 
+function persistCarAttributesToSession(handlerInput, sessionAttributes, carAttributes)
+{
+    if(carAttributes != null)
+    {
+        //Persist data to session
+        sessionAttributes.currentTeslaId = carAttributes.currentTeslaId;
+        sessionAttributes.currentTeslaName = carAttributes.currentTeslaName;
+        sessionAttributes.currentTeslaState = carAttributes.currentTeslaState;
+        sessionAttributes.currentTeslaNamePhoneme = carAttributes.currentTeslaNamePhoneme;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+    }
+}
+
 async function getFirstCarAttributes()
 {
     var carAttributes = null;
@@ -254,10 +295,9 @@ async function getFirstCarAttributes()
     {
         logErrorInformation('getFirstVehicleProperties', error);
     }
-    finally
-    {
-        return carAttributes;
-    }
+    
+    console.log('Returning carAttributes');
+    return carAttributes;
 }
 
 async function getChargeStateResponse(handlerInput, clearNextCommand)
@@ -450,10 +490,12 @@ function isCarAvailable(currentState)
     && currentState != 'asleep'
     && currentState != 'offline')
     {
+        console.log('Car is available');
         return true;
     }
     else
     {
+        console.log('Car is not available');
         return false;
     }
 }
