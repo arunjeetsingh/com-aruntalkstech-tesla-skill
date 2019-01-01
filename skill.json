@@ -30,6 +30,8 @@
         "locales": {
           "en-US": {
             "name": "Nikola",
+            "smallIconUri": "https://s3.amazonaws.com/nikolatesla2/NikolaLogo108x108.png",
+            "largeIconUri": "https://s3.amazonaws.com/nikolatesla2/NikolaLogo512x512.jpg",
             "summary": "Ask Alexa about your Tesla",
             "description": "Ask Alexa whether your Tesla is charged.",
             "examplePhrases": [
