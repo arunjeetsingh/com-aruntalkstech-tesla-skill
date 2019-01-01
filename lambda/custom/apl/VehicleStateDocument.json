@@ -11,12 +11,12 @@
     "styles": {
         "textStylePrimary": {
             "values": {
-                "fontSize": 48
+                "fontSize": 72
             }
         },
         "textStyleSecondary": {
             "values": {
-                "fontSize": 36
+                "fontSize": 60
             }
         }
     },
@@ -61,21 +61,70 @@
                 "justifyContent": "start",
                 "items": [
                     {
-                        "type": "Text",
-                        "text": "${payload.vehicleDisplayData.name}",
-                        "style": "textStylePrimary"
-                    },
-                    {
-                        "type": "Text",
-                        "text": "${payload.vehicleDisplayData.state}",
-                        "style": "textStyleSecondary"
+                        "type": "Frame",
+                        "backgroundColor": "#333333",
+                        "width": "100%",
+                        "height": "100%",
+                        "position": "absolute"
                     },
                     {
                         "type": "Image",
                         "width": "100%",
                         "height": "100%",
+                        "position": "absolute",
                         "scale": "best-fill",
-                        "source": "${payload.vehicleDisplayData.imageUrl}"
+                        "source": "${payload.vehicleDisplayData.imageUrl}",
+                        "overlayColor": "rgba(0, 0, 0, 0.3)"
+                    },
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.name}",
+                        "style": "textStylePrimary",
+                        "paddingTop": "5vh"
+                    },
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.state}",
+                        "style": "textStyleSecondary",
+                        "paddingBottom": "10vh"
+                    },
+                    {
+                        "when": "${payload.vehicleDisplayData.chargeDataAvailable}",
+                        "type": "Frame",
+                        "backgroundColor": "rgba(100, 100, 100, 0.5)",
+                        "borderRadius": 50,
+                        "height": "40%",
+                        "width": "80%",
+                        "item": {
+                            "type": "Container",
+                            "height": "100%",
+                            "alignItems": "start",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "backgroundColor": "rgba(0, 255, 0, 0.5)",
+                                    "borderRadius": 50,
+                                    "width": "${payload.chargeData.batteryLevel}%",
+                                    "height": "100%"
+                                },
+                                {
+                                    "type": "Container",
+                                    "position": "absolute",
+                                    "width": "100%",
+                                    "height": "100%",
+                                    "alignItems": "center",
+                                    "justifyContent": "center",
+                                    "items": [
+                                        {
+                                            "type": "Text",
+                                            "position": "absolute",
+                                            "text": "${payload.chargeData.batteryRange} miles",
+                                            "style": "textStylePrimary"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     }
                 ]
             }

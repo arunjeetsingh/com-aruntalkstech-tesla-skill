@@ -2,6 +2,11 @@
     "vehicleDisplayData": {
         "name": "Sample Car",
         "state": "asleep",
-        "imageUrl": "https://s3.amazonaws.com/nikolatesla2/MDL3PPSB.png"
+        "imageUrl": "[https://.../MDL3PPSB.png]",
+        "chargeDataAvailable": true
+    },
+    "chargeData": {
+        "batteryLevel": 60,
+        "batteryRange": 278
     }
 }
