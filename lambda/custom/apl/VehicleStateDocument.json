@@ -1,0 +1,84 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "fontSize": 48
+            }
+        },
+        "textStyleSecondary": {
+            "values": {
+                "fontSize": 36
+            }
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "when": "${viewport.shape == 'round'}",
+                "type": "Container",
+                "width": "100%",
+                "height": "100%",
+                "alignItems": "center",
+                "justifyContent": "spaceBetween",
+                "items": [
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.name}",
+                        "style": "textStylePrimary",
+                        "paddingTop": "10vh"
+                    },
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.state}",
+                        "style": "textStyleSecondary"
+                    },
+                    {
+                        "type": "Image",
+                        "width": "100%",
+                        "height": "100%",
+                        "scale": "best-fill",
+                        "source": "${payload.vehicleDisplayData.imageUrl}"
+                    }
+                ]
+            },
+            {
+                "type": "Container",
+                "width": "100%",
+                "height": "100%",
+                "alignItems": "center",
+                "justifyContent": "start",
+                "items": [
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.name}",
+                        "style": "textStylePrimary"
+                    },
+                    {
+                        "type": "Text",
+                        "text": "${payload.vehicleDisplayData.state}",
+                        "style": "textStyleSecondary"
+                    },
+                    {
+                        "type": "Image",
+                        "width": "100%",
+                        "height": "100%",
+                        "scale": "best-fill",
+                        "source": "${payload.vehicleDisplayData.imageUrl}"
+                    }
+                ]
+            }
+        ]
+    }
+}

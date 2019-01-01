@@ -1,0 +1,7 @@
+{
+    "vehicleDisplayData": {
+        "name": "Sample Car",
+        "state": "asleep",
+        "imageUrl": "https://s3.amazonaws.com/nikolatesla2/MDL3PPSB.png"
+    }
+}
