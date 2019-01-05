@@ -16,7 +16,14 @@
         },
         "textStyleSecondary": {
             "values": {
-                "fontSize": 60
+                "fontSize": 60,
+                "textAlign": "center"
+            }
+        },
+        "textStyleTertiary": {
+            "values": {
+                "fontSize": 36,
+                "textAlign": "center"
             }
         }
     },
@@ -83,10 +90,21 @@
                         "paddingTop": "5vh"
                     },
                     {
-                        "type": "Text",
-                        "text": "${payload.vehicleDisplayData.state}",
-                        "style": "textStyleSecondary",
-                        "paddingBottom": "10vh"
+                        "type": "Container",
+                        "paddingBottom": "10vh",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "text": "${payload.vehicleDisplayData.state}",
+                                "style": "textStyleSecondary"
+                            },
+                            {
+                                "when": "${payload.vehicleDisplayData.chargeDataAvailable}",
+                                "type": "Text",
+                                "text": "${payload.chargeData.timeRemaining} remaining",
+                                "style": "textStyleTertiary"
+                            }
+                        ]
                     },
                     {
                         "when": "${payload.vehicleDisplayData.chargeDataAvailable}",

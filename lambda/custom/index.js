@@ -133,6 +133,8 @@ const YesIntentHandler = {
             skillResponse = await wakeCar(handlerInput);
         }
 
+        sessionAttributes.nextCommand = null;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
         console.log('Response: ' + JSON.stringify(skillResponse));
         return skillResponse;
     },
@@ -330,6 +332,8 @@ async function getChargeStateResponse(handlerInput, clearNextCommand)
         sessionAttributes.battery_range = chargeResponse.battery_range;
         sessionAttributes.battery_level = chargeResponse.battery_level;
         sessionAttributes.charging_state = chargeResponse.charging_state;
+        sessionAttributes.time_to_full_charge = chargeResponse.time_to_full_charge;
+        sessionAttributes.timeRemainingToFullCharge = convertDecimalTimeRangeToString(sessionAttributes.time_to_full_charge);
         if(clearNextCommand)
         {
             sessionAttributes.nextCommand = null;
@@ -337,17 +341,24 @@ async function getChargeStateResponse(handlerInput, clearNextCommand)
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
         
         speechText = `${sessionAttributes.currentTeslaNamePhoneme} has a range of ` + 
-        `${sessionAttributes.battery_range} miles. Current charge state is ${sessionAttributes.charging_state}`;
+        `${sessionAttributes.battery_range} miles. It is currently ${sessionAttributes.charging_state}`;
+
+        if(sessionAttributes.time_to_full_charge != null &&
+            sessionAttributes.time_to_full_charge > 0)
+        {
+            speechText += ' and should be done in ' + sessionAttributes.timeRemainingToFullCharge;            
+        }
 
         var vehicleStateDatasource = new Object();
         vehicleStateDatasource.vehicleDisplayData = new Object();
         vehicleStateDatasource.vehicleDisplayData.name = sessionAttributes.currentTeslaName;
-        vehicleStateDatasource.vehicleDisplayData.state = sessionAttributes.currentTeslaState;
+        vehicleStateDatasource.vehicleDisplayData.state = sessionAttributes.charging_state;
         vehicleStateDatasource.vehicleDisplayData.imageUrl = Model3BlueImageUrl;
         vehicleStateDatasource.vehicleDisplayData.chargeDataAvailable = true;
         vehicleStateDatasource.chargeData = new Object();
         vehicleStateDatasource.chargeData.batteryLevel = sessionAttributes.battery_level;
         vehicleStateDatasource.chargeData.batteryRange = sessionAttributes.battery_range;
+        vehicleStateDatasource.chargeData.timeRemaining = sessionAttributes.timeRemainingToFullCharge;
         
         handlerInput.responseBuilder
             .speak(speechText);
@@ -534,6 +545,36 @@ function supportsAPL(handlerInput) {
     const supportedInterfaces = handlerInput.requestEnvelope.context.System.device.supportedInterfaces;
     const aplInterface = supportedInterfaces['Alexa.Presentation.APL'];
     return aplInterface != null && aplInterface != undefined;
+}
+
+function convertDecimalTimeRangeToString(timeRange)
+{
+    var hours = 0;
+    var minutes = 0;
+    var timeRangeString = '';
+
+    hours = Math.floor(timeRange);
+    minutes = Math.round((timeRange - hours) * 60);
+
+    if(hours > 0)
+    {
+        timeRangeString += hours + ' hours';
+    }
+
+    if(minutes > 0)
+    {
+        timeRangeString += ' ' + minutes;
+        if(minutes > 1)
+        {
+            timeRangeString += ' minutes';
+        }
+        else
+        {
+            timeRangeString += ' minute';
+        }
+    }
+
+    return timeRangeString;
 }
 
 const skillBuilder = Alexa.SkillBuilders.custom();

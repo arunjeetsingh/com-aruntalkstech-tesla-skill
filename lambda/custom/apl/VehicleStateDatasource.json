@@ -1,12 +1,13 @@
 {
     "vehicleDisplayData": {
         "name": "Sample Car",
-        "state": "asleep",
-        "imageUrl": "[https://.../MDL3PPSB.png]",
-        "chargeDataAvailable": true
+        "state": "charging",
+        "imageUrl": "https://.../MDL3PPSB.png",
+        "chargeDataAvailable": false
     },
     "chargeData": {
         "batteryLevel": 60,
-        "batteryRange": 278
+        "batteryRange": 278,
+        "timeRemaining": "7 hr 55 min"
     }
 }
