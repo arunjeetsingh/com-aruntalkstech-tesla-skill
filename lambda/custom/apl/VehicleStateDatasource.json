@@ -2,12 +2,24 @@
     "vehicleDisplayData": {
         "name": "Sample Car",
         "state": "charging",
-        "imageUrl": "https://.../MDL3PPSB.png",
+        "imageUrl": "https://s3.amazonaws.com/nikolatesla2/MDL3PPSB.png",
         "chargeDataAvailable": false
     },
     "chargeData": {
         "batteryLevel": 60,
         "batteryRange": 278,
         "timeRemaining": "7 hr 55 min"
+    },
+    "hintsData": {
+        "type": "object",
+        "properties": {
+            "hints": [
+                { "hint": "how do I change gears" },
+                { "hint": "how do I turn on climate control" },
+                { "hint": "tell me about autopilot" },
+                { "hint": "show me how to charge" },
+                { "hint": "honk the horn" }
+            ]
+        }
     }
 }

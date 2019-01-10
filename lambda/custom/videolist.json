@@ -1,0 +1,55 @@
+{
+    "videoResponses": {
+        "drivingIntentResponse": {
+            "type": "object",
+            "properties": {
+                "title": "Driving",
+                "description": "Your Model 3 is always ready to go. With your Phone Key or key card, just place your foot on the brake, and use the gear selector to the right of the steering wheel to shift into gear and start driving. To park, press the silver button on the end of the gear selector. After you park, simply take your Phone Key or key card with you, and exit the vehicle – it will turn off automatically. ",
+                "source": "https://www.tesla.com/ns_videos/ownership/model3/Model3_Features_Gear_Selection.mp4",
+                "hasAudio": false
+            },
+            "transformers": [{
+                "transformer": "ssmlToSpeech",
+                "inputPath": "description",
+                "outputName": "descriptionSpeech"
+            }]
+        },
+        "climateControlIntentResponse": {
+            "type": "object",
+            "properties": {
+                "title": "Climate Control",
+                "description": "Tap the fan icon to adjust the climate control settings. Adjust the vent levels, air speed, temperature and more from the central menu. When the face-level vents are selected, grids will appear to customize airflow. Tap on the air-stream icons to toggle between a single or dual stream of air. Drag the icons to position the direction of airflow.",
+                "source": "https://www.tesla.com/ns_videos/ownership/model3/ClimateControl.mp4",
+                "hasAudio": false
+            },
+            "transformers": [{
+                "transformer": "ssmlToSpeech",
+                "inputPath": "description",
+                "outputName": "descriptionSpeech"
+            }]
+        },
+        "autoPilotIntentResponse": {
+            "type": "object",
+            "properties": {
+                "title": "Autopilot",
+                "description": "If configured on your car, your Model 3 will indicate that Traffic-Aware Cruise Control and Autosteer are available by presenting a gray steering wheel and speed dial icon below your speedometer. When available, press down on the gear selector once to engage Traffic-Aware Cruise Control, or twice to engage Traffic-Aware Cruise Control and Autosteer. The Traffic-Aware Cruise Control and Autosteer icon will then highlight blue to indicate that they are engaged.",
+                "source": "https://www.tesla.com/ns_videos/ownership/model3/Model3_Features_AutoPilot.mp4",
+                "hasAudio": true
+            }
+        },
+        "chargeHelpIntentResponse": {
+            "type": "object",
+            "properties": {
+                "title": "Charging",
+                "description": "On the car status on the touchscreen, touch the charging icon. Select the lightning bolt icon and select \"Open Charge Port.\"",
+                "source": "https://www.tesla.com/ns_videos/ownership/model3/Model3_Features_Charge_Port.mp4",
+                "hasAudio": false
+            },
+            "transformers": [{
+                "transformer": "ssmlToSpeech",
+                "inputPath": "description",
+                "outputName": "descriptionSpeech"
+            }]
+        }
+    }
+}

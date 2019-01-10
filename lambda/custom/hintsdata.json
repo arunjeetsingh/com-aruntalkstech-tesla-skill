@@ -1,0 +1,20 @@
+{
+    "hintsData": {
+        "type": "object",
+        "properties": {
+            "hints": [
+                { "hint": "how do I change gears" },
+                { "hint": "how do I turn on climate control" },
+                { "hint": "tell me about autopilot" },
+                { "hint": "show me how to charge" },
+                { "hint": "is my car charged?" }
+            ]
+        },
+        "transformers": [
+            {
+                "transformer": "textToHint",
+                "inputPath": "hints[*].hint"
+            }
+        ]
+    }
+}

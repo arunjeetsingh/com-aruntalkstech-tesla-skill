@@ -1,55 +1,100 @@
 {
-  "interactionModel": {
-    "languageModel": {
-      "invocationName": "nikola tesla",
-      "types": [
-
-      ],
-      "intents": [
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": [
-
-          ]
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": [
-
-          ]
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": [
-
-          ]
-        },
-        {
-            "name": "AMAZON.YesIntent",
-            "samples": [
-  
-            ]
-          },
-        {
-          "name": "ChargeStatusIntent",
-          "slots": [],
-          "samples": [
-            "charging status",
-            "my car is charged",
-            "charge",
-            "charging",
-            "power"
-          ]
-        },
-        {
-            "name": "HonkIntent",
-            "slots": [],
-            "samples": [
-              "honk",
-              "honk the horn"
-            ]
-          }
-      ]
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "my tesla",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ChargeStatusIntent",
+                    "slots": [],
+                    "samples": [
+                        "charging status",
+                        "my car is charged",
+                        "charge",
+                        "power"
+                    ]
+                },
+                {
+                    "name": "HonkIntent",
+                    "slots": [],
+                    "samples": [
+                        "honk",
+                        "honk the horn"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "DrivingIntent",
+                    "slots": [],
+                    "samples": [
+                        "how to drive",
+                        "drive",
+                        "get started",
+                        "how do I change gears",
+                        "driving",
+                        "gears",
+                        "controls"
+                    ]
+                },
+                {
+                    "name": "ClimateControlIntent",
+                    "slots": [],
+                    "samples": [
+                        "how do I turn on climate control",
+                        "how do I turn on the a c",
+                        "cooling",
+                        "temperature",
+                        "a c",
+                        "climate control"
+                    ]
+                },
+                {
+                    "name": "AutoPilotIntent",
+                    "slots": [],
+                    "samples": [
+                        "tell me about autopilot",
+                        "auto steer",
+                        "lane assist",
+                        "cruise control",
+                        "self driving",
+                        "auto pilot",
+                        "autopilot"
+                    ]
+                },
+                {
+                    "name": "ChargeHelpIntent",
+                    "slots": [],
+                    "samples": [
+                        "show me how to charge",
+                        "help with charging",
+                        "charging",
+                        "how to charge"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
     }
-  }
 }

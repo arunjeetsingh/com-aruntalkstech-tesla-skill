@@ -35,9 +35,9 @@
             "summary": "Ask Alexa about your Tesla",
             "description": "Ask Alexa whether your Tesla is charged.",
             "examplePhrases": [
-              "Alexa open nikola",
-              "Alexa ask nikola about charge status",
-              "Alexa ask nikola if my car is charged"
+              "Alexa open my tesla",
+              "Alexa ask my tesla its charge status",
+              "Alexa ask my tesla how do I change gears"
             ],
             "keywords": [
               "Tesla"
@@ -45,7 +45,7 @@
           }
         },
         "isAvailableWorldwide": true,
-        "testingInstructions": "Alexa, ask nikola about charge status",
+        "testingInstructions": "Alexa, ask my tesla about charge status",
         "category": "CONNECTED_CAR",
         "distributionCountries": []
       }
