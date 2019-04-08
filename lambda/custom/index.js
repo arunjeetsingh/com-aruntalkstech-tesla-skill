@@ -232,6 +232,32 @@ const CancelNoAndStopIntentHandler = {
   },
 };
 
+const PauseIntentHandler = {
+    canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.PauseIntent';
+    },
+    async handle(handlerInput) {
+        console.log('PauseIntentHandler' + JSON.stringify(handlerInput.requestEnvelope));
+        var skillResponse = getPauseResponse(handlerInput);
+        console.log('Response: ' + JSON.stringify(skillResponse));
+        return skillResponse;
+    },
+};
+
+const ResumeIntentHandler = {
+    canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.ResumeIntent';
+    },
+    async handle(handlerInput) {
+        console.log('ResumeIntent' + JSON.stringify(handlerInput.requestEnvelope));
+        var skillResponse = getPauseResponse(handlerInput);
+        console.log('Response: ' + JSON.stringify(skillResponse));
+        return skillResponse;
+    },
+};
+
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -381,6 +407,92 @@ function getVideoResponse(handlerInput, videoDocumentDatasources)
     {
         console.log ('getVideoResponse error: ' + error);
         console.log ('getVideoResponse request: ' + JSON.stringify(error.request));
+
+        speechText = errorSpeechText;
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withSimpleCard('Oops!', speechText)
+            .getResponse();
+    }
+}
+
+function getPauseResponse(handlerInput)
+{
+    var speechText = errorSpeechText;
+
+    try
+    {
+        if(supportsAPL(handlerInput))
+        {
+            handlerInput.responseBuilder
+                .addDirective(
+                    {
+                        type: 'Alexa.Presentation.APL.ExecuteCommands',
+                        token: 'videoResponseWithAudio',
+                        commands: [
+                            {
+                                "type": "ControlMedia",
+                                "componentId": "VideoPlayer",
+                                "command": "pause"
+                            }
+                        ]
+                    });
+        }
+        else
+        {
+            handlerInput.responseBuilder
+            .speak("This device can not play video.");
+        }
+
+        return handlerInput.responseBuilder.getResponse();
+    }
+    catch(error)
+    {
+        console.log ('getPauseResponse error: ' + error);
+        console.log ('getPauseResponse request: ' + JSON.stringify(error.request));
+
+        speechText = errorSpeechText;
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withSimpleCard('Oops!', speechText)
+            .getResponse();
+    }
+}
+
+function getResumeResponse(handlerInput)
+{
+    var speechText = errorSpeechText;
+
+    try
+    {
+        if(supportsAPL(handlerInput))
+        {
+            handlerInput.responseBuilder
+                .addDirective(
+                    {
+                        type: 'Alexa.Presentation.APL.ExecuteCommands',
+                        token: 'videoResponseWithAudio',
+                        commands: [
+                            {
+                                "type": "ControlMedia",
+                                "componentId": "VideoPlayer",
+                                "command": "play"
+                            }
+                        ]
+                    });
+        }
+        else
+        {
+            handlerInput.responseBuilder
+            .speak("This device can not play video.");
+        }
+
+        return handlerInput.responseBuilder.getResponse();
+    }
+    catch(error)
+    {
+        console.log ('getResumeResponse error: ' + error);
+        console.log ('getResumeResponse request: ' + JSON.stringify(error.request));
 
         speechText = errorSpeechText;
         return handlerInput.responseBuilder
@@ -802,7 +914,9 @@ exports.handler = skillBuilder
     ClimateControlIntentHandler,
     AutoPilotIntentHandler,
     ChargeHelpIntentHandler,
-    FallbackIntentHandler
+    FallbackIntentHandler,
+    PauseIntentHandler,
+    ResumeIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();

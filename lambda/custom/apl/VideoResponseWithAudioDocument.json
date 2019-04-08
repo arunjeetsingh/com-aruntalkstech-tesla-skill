@@ -4,7 +4,7 @@
     "import": [
         {
             "name": "alexa-layouts",
-            "version": "1.0.0-beta"
+            "version": "1.0.0"
         }
     ],
     "styles": {
@@ -41,12 +41,44 @@
                 "items": [
                     {
                         "type": "Video",
+                        "id": "VideoPlayer",
                         "autoplay": true,
                         "width": "100%",
                         "height": "100%",
                         "scale": "best-fit",
                         "source": "${payload.videoResponseData.properties.source}",
-                        "position": "absolute"
+                        "position": "absolute",
+                        "onPause":[
+                            {
+                               "type": "SetState",
+                               "componentId": "alexaPlayPauseToggleButton",
+                               "state": "checked",
+                               "value": true
+                          }
+                        ],
+                        "onPlay":[
+                            {
+                               "type": "SetState",
+                               "componentId": "alexaPlayPauseToggleButton",
+                               "state": "checked",
+                               "value": false
+                          }
+                        ],
+                        "onEnd":[
+                            {
+                                "type": "Sequential",
+                                "commands": [{
+                                "type": "SetState",
+                                "componentId": "alexaPlayPauseToggleButton",
+                                "state": "checked",
+                                "value": true
+                                },
+                                {
+                                    "type": "ControlMedia",
+                                    "command": "rewind"
+                                }]
+                            }
+                        ]
                     },
                     {
                         "type": "Frame",
@@ -63,7 +95,8 @@
                     {
                         "type": "AlexaTransportControls",
                         "secondaryControls": "none",
-                        "componentId": "VideoPlayer"
+                        "autoplay": "${payload.videoResponseData.properties.hasAudio ? true : false}",
+                        "mediaComponentId": "VideoPlayer"
                     }
                 ]
             },
@@ -101,12 +134,42 @@
                             "height": "100%",
                             "scale": "best-fit",
                             "source": "${payload.videoResponseData.properties.source}",
-                            "position": "absolute"
+                            "position": "absolute",
+                            "onPause":[
+                                {
+                                   "type": "SetState",
+                                   "componentId": "alexaPlayPauseToggleButton",
+                                   "state": "checked",
+                                   "value": true
+                              }
+                            ],
+                            "onPlay":[
+                                {
+                                   "type": "SetState",
+                                   "componentId": "alexaPlayPauseToggleButton",
+                                   "state": "checked",
+                                   "value": false
+                              }
+                            ],
+                            "onEnd":[
+                            {
+                                "type": "SetState",
+                                "componentId": "alexaPlayPauseToggleButton",
+                                "state": "checked",
+                                "value": true
+                            },
+                            {
+                                "type": "ControlMedia",
+                                "componentId": "VideoPlayer",
+                                "command": "rewind"
+                            }
+                            ]
                         },
                         {
                             "type": "AlexaTransportControls",
                             "secondaryControls": "none",
-                            "componentId": "VideoPlayer"
+                            "autoplay": "${payload.videoResponseData.properties.hasAudio ? true : false}",
+                            "mediaComponentId": "VideoPlayer"
                         },
                         {
                             "when": "${payload.videoResponseData.properties.hasAudio == false}",

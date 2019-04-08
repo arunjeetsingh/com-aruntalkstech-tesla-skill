@@ -1,100 +1,154 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "my tesla",
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.YesIntent",
-                    "samples": []
-                },
-                {
-                    "name": "ChargeStatusIntent",
-                    "slots": [],
-                    "samples": [
-                        "charging status",
-                        "my car is charged",
-                        "charge",
-                        "power"
-                    ]
-                },
-                {
-                    "name": "HonkIntent",
-                    "slots": [],
-                    "samples": [
-                        "honk",
-                        "honk the horn"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "DrivingIntent",
-                    "slots": [],
-                    "samples": [
-                        "how to drive",
-                        "drive",
-                        "get started",
-                        "how do I change gears",
-                        "driving",
-                        "gears",
-                        "controls"
-                    ]
-                },
-                {
-                    "name": "ClimateControlIntent",
-                    "slots": [],
-                    "samples": [
-                        "how do I turn on climate control",
-                        "how do I turn on the a c",
-                        "cooling",
-                        "temperature",
-                        "a c",
-                        "climate control"
-                    ]
-                },
-                {
-                    "name": "AutoPilotIntent",
-                    "slots": [],
-                    "samples": [
-                        "tell me about autopilot",
-                        "auto steer",
-                        "lane assist",
-                        "cruise control",
-                        "self driving",
-                        "auto pilot",
-                        "autopilot"
-                    ]
-                },
-                {
-                    "name": "ChargeHelpIntent",
-                    "slots": [],
-                    "samples": [
-                        "show me how to charge",
-                        "help with charging",
-                        "charging",
-                        "how to charge"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NoIntent",
-                    "samples": []
-                }
-            ],
-            "types": []
-        }
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "my tesla",
+        "intents": [
+          {
+            "name": "AMAZON.CancelIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.HelpIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.StopIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.YesIntent",
+            "samples": []
+          },
+          {
+            "name": "ChargeStatusIntent",
+            "slots": [],
+            "samples": [
+              "is my car charged",
+              "what's the charging status",
+              "charging status",
+              "my car is charged",
+              "charge",
+              "power"
+            ]
+          },
+          {
+            "name": "HonkIntent",
+            "slots": [],
+            "samples": [
+              "honk",
+              "honk the horn"
+            ]
+           },
+           {
+             "name": "AMAZON.NavigateHomeIntent",
+             "samples": []
+           },
+           {
+             "name": "DrivingIntent",
+             "slots": [],
+             "samples": [
+               "how to drive",
+               "drive",
+               "get started",
+               "how do I change gears",
+               "driving",
+               "gears",
+               "controls"
+             ]
+            },
+            {
+              "name": "ClimateControlIntent",
+              "slots": [],
+              "samples": [
+                "how do I turn on climate control",
+                "how do I turn on the a c",
+                "cooling",
+                "temperature",
+                "a c",
+                "climate control"
+              ]
+            },
+            {
+              "name": "AutoPilotIntent",
+              "slots": [],
+              "samples": [
+                "tell me about autopilot",
+                "auto steer",
+                "lane assist",
+                "cruise control",
+                "self driving",
+                "auto pilot",
+                "autopilot"
+              ]
+            },
+            {
+              "name": "ChargeHelpIntent",
+              "slots": [],
+              "samples": [
+                "show me how to charge",
+                "help with charging",
+                "charging",
+                "how to charge"
+              ]
+            },
+            {
+              "name": "AMAZON.NoIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.MoreIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.NavigateSettingsIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.NextIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.PageUpIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.PageDownIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.PreviousIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.ScrollRightIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.ScrollDownIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.ScrollLeftIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.ScrollUpIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.FallbackIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.PauseIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.ResumeIntent",
+              "samples": []
+            }
+        ],
+      "types": []
     }
+  }
 }
