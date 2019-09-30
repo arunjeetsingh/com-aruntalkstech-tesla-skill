@@ -363,7 +363,13 @@ function getVideoResponse(handlerInput, videoDocumentDatasources)
                                 "type": "SpeakItem",
                                 "componentId": "Narrative",
                                 "highlightMode": "line",
-                                "align": "first"
+                                "align": "visible"
+                            },
+                            {
+                                "type": "SetValue",
+                                "componentId": "Narrative",
+                                "property": "display",
+                                "value": "none"
                             },
                             {
                                 "type": "ControlMedia",

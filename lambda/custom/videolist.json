@@ -4,7 +4,7 @@
             "type": "object",
             "properties": {
                 "title": "Driving",
-                "description": "Your Model 3 is always ready to go. With your Phone Key or key card, just place your foot on the brake, and use the gear selector to the right of the steering wheel to shift into gear and start driving. To park, press the silver button on the end of the gear selector. After you park, simply take your Phone Key or key card with you, and exit the vehicle – it will turn off automatically. ",
+                "description": "<speak>Your Model 3 is always ready to go. With your Phone Key or key card, just place your foot on the brake, and use the gear selector to the right of the steering wheel to shift into gear and start driving. To park, press the silver button on the end of the gear selector. After you park, simply take your Phone Key or key card with you, and exit the vehicle – it will turn off automatically.</speak>",
                 "source": "https://www.tesla.com/ns_videos/ownership/model3/Model3_Features_Gear_Selection.mp4",
                 "hasAudio": false
             },
@@ -18,7 +18,7 @@
             "type": "object",
             "properties": {
                 "title": "Climate Control",
-                "description": "Tap the fan icon to adjust the climate control settings. Adjust the vent levels, air speed, temperature and more from the central menu. When the face-level vents are selected, grids will appear to customize airflow. Tap on the air-stream icons to toggle between a single or dual stream of air. Drag the icons to position the direction of airflow.",
+                "description": "<speak>Tap the fan icon to adjust the climate control settings. Adjust the vent levels, air speed, temperature and more from the central menu. When the face-level vents are selected, grids will appear to customize airflow. Tap on the air-stream icons to toggle between a single or dual stream of air. Drag the icons to position the direction of airflow.</speak>",
                 "source": "https://www.tesla.com/ns_videos/ownership/model3/ClimateControl.mp4",
                 "hasAudio": false
             },
@@ -46,7 +46,7 @@
                 "hasAudio": false
             },
             "transformers": [{
-                "transformer": "ssmlToSpeech",
+                "transformer": "textToSpeech",
                 "inputPath": "description",
                 "outputName": "descriptionSpeech"
             }]

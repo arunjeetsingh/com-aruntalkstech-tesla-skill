@@ -1,6 +1,6 @@
 {
     "type": "APL",
-    "version": "1.0",
+    "version": "1.1",
     "import": [
         {
             "name": "alexa-layouts",
@@ -20,10 +20,18 @@
             }
         },
         "textStyleTertiary": {
-            "values": {
+            "values": [{
                 "fontSize": 36,
                 "textAlign": "center"
-            }
+            },
+            {
+                "when": "${state.karaoke}",
+                "color": "grey"
+            },
+            {
+                "when": "${state.karaokeTarget}",
+                "color": "white"
+            }]
         }
     },
     "mainTemplate": {
@@ -173,15 +181,12 @@
                         },
                         {
                             "when": "${payload.videoResponseData.properties.hasAudio == false}",
-                            "type": "ScrollView",
-                            "height": "10%",
-                            "width": "80%",
-                            "item": {
-                                "type": "Text",
-                                "id": "Narrative",
-                                "text": "${payload.videoResponseData.properties.description}",
-                                "speech": "${payload.videoResponseData.properties.descriptionSpeech}"
-                            }
+                            "type": "Text",
+                            "id": "Narrative",
+                            "width": "80%",    
+                            "style": "textStyleTertiary",
+                            "text": "${payload.videoResponseData.properties.description}",
+                            "speech": "${payload.videoResponseData.properties.descriptionSpeech}"
                         }
                         ]
                     },
