@@ -21,6 +21,7 @@ const getVehiclesUri = '/api/1/vehicles';
 
 //APL Documents
 const vehicleStateApl = require('apl/VehicleStateDocument.json');
+const vehicleStateAplt = require('apl/VehicleStateApltDocument.json');
 const videoResponseWithAudioApl = require('apl/VideoResponseWithAudioDocument.json');
 
 const userAgent = 'Nikola Skill/1.0-alpha'
@@ -701,6 +702,15 @@ async function getChargeStateResponse(handlerInput, clearNextCommand)
                     ]
                 });
         }
+        else if(supportsAPLT(handlerInput))
+        {
+            handlerInput.responseBuilder
+            .addDirective({
+                type: 'Alexa.Presentation.APLT.RenderDocument',
+                document: vehicleStateAplt,
+                datasources: vehicleStateDatasource
+                });
+        }
 
         return handlerInput.responseBuilder.getResponse();
     }
@@ -872,6 +882,12 @@ function isCarAvailable(currentState)
 function supportsAPL(handlerInput) {
     const supportedInterfaces = handlerInput.requestEnvelope.context.System.device.supportedInterfaces;
     const aplInterface = supportedInterfaces['Alexa.Presentation.APL'];
+    return aplInterface != null && aplInterface != undefined;
+}
+
+function supportsAPLT(handlerInput) {
+    const supportedInterfaces = handlerInput.requestEnvelope.context.System.device.supportedInterfaces;
+    const aplInterface = supportedInterfaces['Alexa.Presentation.APLT'];
     return aplInterface != null && aplInterface != undefined;
 }
 
